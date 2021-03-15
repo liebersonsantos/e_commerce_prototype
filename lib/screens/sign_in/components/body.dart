@@ -1,8 +1,10 @@
 import 'package:e_commerce_prototype/components/custom_surfix_icon.dart';
 import 'package:e_commerce_prototype/components/default_button.dart';
 import 'package:e_commerce_prototype/components/form_error.dart';
+import 'package:e_commerce_prototype/components/no_account_text.dart';
 import 'package:e_commerce_prototype/components/social_icon.dart';
 import 'package:e_commerce_prototype/contants.dart';
+import 'package:e_commerce_prototype/screens/forgot_password/forgot_password_screen.dart';
 import 'package:e_commerce_prototype/screens/sign_in/components/sign_form.dart';
 import 'package:e_commerce_prototype/size_config.dart';
 import 'package:flutter/material.dart';
@@ -54,22 +56,10 @@ class Body extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: getProportionateScreenHeight(20),),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account? ",
-                      style: TextStyle(fontSize: getProportionateScreenWidth(16)),
-                    ),
-                    Text(
-                      "Sign Up",
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(16),
-                          color: kPrimaryColor),
-                    )
-                  ],
+                SizedBox(
+                  height: getProportionateScreenHeight(20),
                 ),
+                NoAccountText(),
               ],
             ),
           ),

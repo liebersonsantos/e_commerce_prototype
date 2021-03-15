@@ -1,6 +1,7 @@
 import 'package:e_commerce_prototype/components/custom_surfix_icon.dart';
 import 'package:e_commerce_prototype/components/default_button.dart';
 import 'package:e_commerce_prototype/components/form_error.dart';
+import 'package:e_commerce_prototype/screens/forgot_password/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../contants.dart';
@@ -37,9 +38,12 @@ class _SingFormState extends State<SingForm> {
               }),
               Text("Remember me"),
               Spacer(),
-              Text(
-                "Forgot Password",
-                style: TextStyle(decoration: TextDecoration.underline),
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, ForgotPasswordScreen.routeName),
+                child: Text(
+                  "Forgot Password",
+                  style: TextStyle(decoration: TextDecoration.underline),
+                ),
               )
             ],
           ),
