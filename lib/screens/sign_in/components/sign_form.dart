@@ -2,6 +2,7 @@ import 'package:e_commerce_prototype/components/custom_surfix_icon.dart';
 import 'package:e_commerce_prototype/components/default_button.dart';
 import 'package:e_commerce_prototype/components/form_error.dart';
 import 'package:e_commerce_prototype/screens/forgot_password/forgot_password_screen.dart';
+import 'package:e_commerce_prototype/screens/login_success/login_success_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../contants.dart';
@@ -31,15 +32,19 @@ class _SingFormState extends State<SingForm> {
           SizedBox(height: getProportionateScreenHeight(30)),
           Row(
             children: [
-              Checkbox(value: remember, activeColor: kPrimaryColor, onChanged: (value) {
-                setState(() {
-                  remember = value;
-                });
-              }),
+              Checkbox(
+                  value: remember,
+                  activeColor: kPrimaryColor,
+                  onChanged: (value) {
+                    setState(() {
+                      remember = value;
+                    });
+                  }),
               Text("Remember me"),
               Spacer(),
               GestureDetector(
-                onTap: () => Navigator.pushNamed(context, ForgotPasswordScreen.routeName),
+                onTap: () => Navigator.pushNamed(
+                    context, ForgotPasswordScreen.routeName),
                 child: Text(
                   "Forgot Password",
                   style: TextStyle(decoration: TextDecoration.underline),
@@ -54,6 +59,8 @@ class _SingFormState extends State<SingForm> {
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
+                //if all are valid then go to success screen
+                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
               }
             },
           ),
@@ -75,6 +82,7 @@ class _SingFormState extends State<SingForm> {
           setState(() {
             errors.remove(kShortPassError);
           });
+          return "";
         }
         return null;
       },
@@ -83,10 +91,16 @@ class _SingFormState extends State<SingForm> {
           setState(() {
             errors.add(kPassNullError);
           });
+          return "";
+        } else if (value.isEmpty && errors.contains(kPassNullError)){
+          return "";
+        } else if (value.length < 8 && errors.contains(kShortPassError)) {
+          return "";
         } else if (value.length < 8 && !errors.contains(kShortPassError)) {
           setState(() {
             errors.add(kShortPassError);
           });
+          return "";
         }
         return null;
       },
@@ -121,11 +135,15 @@ class _SingFormState extends State<SingForm> {
           setState(() {
             errors.add(kEmailNullError);
           });
+          return "";
+        } else if (value.isEmpty && errors.contains(kEmailNullError)){
+          return "";
         } else if (!emailValidatorRegExp.hasMatch(value) &&
             !errors.contains(kInvalidEmailError)) {
           setState(() {
             errors.add(kInvalidEmailError);
           });
+          return "";
         }
         return null;
       },
